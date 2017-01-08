@@ -2,7 +2,15 @@ import {Http,BaseRequestOptions,Response,ResponseOptions,RequestMethod,HttpModul
 import {MockBackend,MockConnection} from '@angular/http/testing';
 import {inject,TestBed,getTestBed,async} from '@angular/core/testing';
 import {HeroService} from './hero.service';
+import {Hero} from '../domain/hero'
 
+
+const fakedHeroes:Hero[]=[
+  { id: 1, name: 'Windstorm' },
+  { id: 2, name: 'Bombasto' },
+  { id: 3, name: 'Magneta' },
+  { id: 4, name: 'Tornado' }
+]
 
 
 describe('Http-HeroService (mockBackend)', () => {
@@ -26,7 +34,7 @@ describe('Http-HeroService (mockBackend)', () => {
     .compileComponents();
   }));
 
-  it('can instant	iate service when inject service',
+  it('can instantiate service when inject service',
     inject([HeroService], (service: HeroService) => {
       expect(service instanceof HeroService).toBe(true);
   }));
@@ -44,14 +52,29 @@ describe('Http-HeroService (mockBackend)', () => {
   		backend=mockBackend;
   	}));
   	it('get heroes',(done)=>{
+
   		backend.connections.subscribe((connection:MockConnection)=>{
-  			let options=new ResponseOptions({
-  				body:JSON.stringify({id:1,name:'zhangsan'})
-  			})
+  			expect(connection.request.url).toEqual('api/heroes');
+  			let options=new ResponseOptions({status: 200, body: {data: fakedHeroes}})
   			connection.mockRespond(new Response(options));
   		})
-  		service.getHeroes().then(response=>{expect(response.length).toBe(1);expect(response[0].id).toBe(1);expect(response[0].name).toBe('zhangsan')});
-  		done();
+
+  		service.getHeroes2().subscribe((response=>{
+  			expect(response.length).toEqual(2,'should be 5leh');
+
+  		}))
+
+  		service.getHeroes().then(response=>{
+
+  			let resp=response;
+  			// expect(resp.length).toEqual(2,'should be 4');
+  			// expect(resp.length).toBe(2,'should be 4');
+  			expect(resp[0].name).toEqual('Windstorm333','should be 4');
+  			done();
+
+  		});
+
+  		
   	})
   })
 })

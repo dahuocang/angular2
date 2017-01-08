@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {Hero} from '../domain/hero';
 // import {HEROES} from './mock-heroes';
 import 'rxjs/add/operator/toPromise';
-import {Http,Headers} from '@angular/http';
+import 'rxjs/add/operator/map'
+import { Observable }     from 'rxjs/Observable';
+import {Http,Headers,Response} from '@angular/http';
 @Injectable()
 export class HeroService{
     private heroesUrl ='api/heroes';
@@ -11,9 +13,15 @@ export class HeroService{
     // getHeroes():Promise<Hero[]> {return Promise.resolve(HEROES);}
     getHeroes():Promise<Hero[]>{
 
-        return this.http.get(this.heroesUrl ).toPromise().then(response=>response.json().data as Hero[]).catch(this.handleError);
+        return this.http.get(this.heroesUrl).toPromise().then(response=>response.json().data as Hero[]).catch(this.handleError);
 
     }
+
+       getHeroes2():Observable<Hero[]> {
+
+        return this.http.get(this.heroesUrl).map((r:Response)=>r.json().data as Hero[]);
+    }
+
     private handleError(error:any):Promise<any>{
         console.error("an error occured",error);
         return Promise.reject(error.message||error)
