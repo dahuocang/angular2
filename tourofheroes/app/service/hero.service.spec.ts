@@ -44,6 +44,7 @@ describe('Http-HeroService (mockBackend)', () => {
   	let service=new HeroService(http);
   	expect(service instanceof HeroService).toBe(true,'new service should be ok ');
   }));
+
   describe('get Heroes test',()=>{
   	let service:HeroService=null;
   	let backend:MockBackend=null;
@@ -60,23 +61,30 @@ describe('Http-HeroService (mockBackend)', () => {
   		})
 
   		service.getHeroes2().subscribe((response=>{
-  			expect(response.length).toEqual(2,'should be 5leh');
+  			expect(response.length).toEqual(4,'should be 4');
 
   		}))
 
   		service.getHeroes().then(response=>{
-
   			let resp=response;
-  			// expect(resp.length).toEqual(2,'should be 4');
-  			// expect(resp.length).toBe(2,'should be 4');
-  			expect(resp[0].name).toEqual('Windstorm333','should be 4');
+  			expect(resp[0].name).toEqual('Windstorm','first hero should be Windstorm');
   			done();
-
-  		});
-
-  		
+  		});		
   	})
-  })
+    it('get hero by id',(done)=>{
+
+      backend.connections.subscribe((connection:MockConnection)=>{
+        expect(connection.request.url).toEqual('api/heroes/1')
+        let options=new ResponseOptions({status:200,body:{data:{id:1,name:'lisi'}}})
+        connection.mockRespond(new Response(options));
+      })
+      service.getHero(1).then(response=>{
+        expect(response.id).toEqual(1);
+        expect(response.name).toEqual('lisi');
+      })
+    });
+  });
+
 })
 
 
