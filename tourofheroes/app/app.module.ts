@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeroDetailComponent } from './heroes/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -12,12 +12,14 @@ import {HttpModule} from '@angular/http';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './dao/in-memory-data.service';
 import './core/rxjs-extensions';
-import {HeroSearchComponent} from './heroes/hero-search.component'
+import {HeroSearchComponent} from './heroes/hero-search.component';
+import {AddHeroComponent} from './heroes/add-hero.component';
+import {AddHeroComponent2} from './heroes/add-hero.component2'
 
 
 @NgModule({
-  imports: [BrowserModule, FormsModule,AppRoutingModule,HttpModule,InMemoryWebApiModule.forRoot(InMemoryDataService)],
-  declarations: [AppComponent, HeroDetailComponent, HeroesComponent,DashboardComponent,HeroSearchComponent],
+  imports: [BrowserModule, FormsModule,ReactiveFormsModule, AppRoutingModule,HttpModule,InMemoryWebApiModule.forRoot(InMemoryDataService)],
+  declarations: [AppComponent, HeroDetailComponent, HeroesComponent,DashboardComponent,HeroSearchComponent,AddHeroComponent,AddHeroComponent2],
   bootstrap: [AppComponent],
   providers: [HeroService]
 })

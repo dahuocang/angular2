@@ -71,7 +71,7 @@ describe('Http-HeroService (mockBackend)', () => {
   			done();
   		});		
   	})
-    it('get hero by id',(done)=>{
+    it('get hero by id',()=>{
 
       backend.connections.subscribe((connection:MockConnection)=>{
         expect(connection.request.url).toEqual('api/heroes/1')
