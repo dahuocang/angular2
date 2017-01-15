@@ -5,6 +5,7 @@ import{HeroesComponent} from './heroes/heroes.component';
 import {HeroDetailComponent} from './heroes/hero-detail.component';
 import {AddHeroComponent} from './heroes/add-hero.component';
 import {AddHeroComponent2} from './heroes/add-hero.component2'
+import {LoggedInGuard} from './login/login.guard';
 const routes:Routes=[
     {
       path: 'heroes',
@@ -12,7 +13,7 @@ const routes:Routes=[
     },
     {
       path:'dashboard',
-      component:DashboardComponent
+      component:DashboardComponent,canActivate:[LoggedInGuard]
     },
     {
       path:'',
@@ -36,6 +37,7 @@ const routes:Routes=[
 
 @NgModule({
     imports:[RouterModule.forRoot(routes)],
-    exports:[RouterModule]
+    exports:[RouterModule],
+    providers:[LoggedInGuard]
 })
 export class AppRoutingModule{}

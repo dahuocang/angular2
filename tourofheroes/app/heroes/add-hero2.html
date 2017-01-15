@@ -2,6 +2,12 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
     <label for="heroName">Hero Name:</label>
     <input type="text" name="heroName" [formControl]="myForm.controls['heroName']">
+    <label for="heroId">Hero Id:</label>
+    <input type="text" id="heroId" [formControl]="myForm.controls['heroId']" [(ngModel)]="heroId">
+    <div>The hero id is {{heroId}}</div>
+    <div *ngIf="!myForm.controls['heroName'].valid">heroName is Invalid</div>
+    <div *ngIf="myForm.controls['heroName'].hasError('required')">heroName is required</div>
+    <div *ngIf="myForm.controls['heroName'].hasError('invalidHero')">HeroName must begin with 'hero'</div>
     <button type="submit">Submit</button>
     </form>
 </div>

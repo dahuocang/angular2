@@ -14,14 +14,16 @@ import {InMemoryDataService} from './dao/in-memory-data.service';
 import './core/rxjs-extensions';
 import {HeroSearchComponent} from './heroes/hero-search.component';
 import {AddHeroComponent} from './heroes/add-hero.component';
-import {AddHeroComponent2} from './heroes/add-hero.component2'
-
+import {AddHeroComponent2} from './heroes/add-hero.component2';
+import {AuthService} from './service/auth/auth.service';
+import {LoginComponent} from './login/login.component'
+// import {AUTH_PROVIDERS} from './service/auth/auth.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule,ReactiveFormsModule, AppRoutingModule,HttpModule,InMemoryWebApiModule.forRoot(InMemoryDataService)],
-  declarations: [AppComponent, HeroDetailComponent, HeroesComponent,DashboardComponent,HeroSearchComponent,AddHeroComponent,AddHeroComponent2],
+  declarations: [AppComponent, HeroDetailComponent, HeroesComponent,DashboardComponent,HeroSearchComponent,AddHeroComponent,AddHeroComponent2,LoginComponent],
   bootstrap: [AppComponent],
-  providers: [HeroService]
+  providers: [HeroService,AuthService]
 })
 
 export class AppModule { }

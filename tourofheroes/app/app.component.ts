@@ -8,9 +8,9 @@ import{Component} from '@angular/core';
       <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
        <a routerLink="/heroes" routerLinkActive="active" >Heroes</a>
        <a routerLink="/newhero" routerLinkActive="active" >Add Hero(ngForm&ngControl)</a>
-       <a routerLink="/newhero2" routerLinkActive="active" >Add Hero(Form Builder)</a>
+       <a routerLink="/newhero2" routerLinkActive="active" >Add Hero(Form Builder With Validator)</a>
       </nav>
-     
+      <login></login>
       <router-outlet></router-outlet>
       `,
       styleUrls:['app.component.css']

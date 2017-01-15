@@ -1,0 +1,20 @@
+<form *ngIf="!authService.getUser()">
+    <div>
+        <label for="username">User:</label>
+        <input name="username" #username>
+    </div>
+    <div>
+        <label for="password">password:</label>
+        <input type="password" name="password" #password>
+    </div>
+    <button (click)="login(username.value,password.value)">Submit</button>
+</form>
+
+<div *ngIf="authService.getUser()">
+    Logged in as {{authService.getUser()}}
+    <a href (click)="logout()"> Log out </a>
+</div>
+
+<div *ngIf="message">
+{{message}}
+</div>

@@ -1,6 +1,7 @@
 import {Component ,OnInit} from '@angular/core'
 import {Hero} from '../domain/hero'
 import {HeroService} from '../service/hero.service'
+
 @Component ({
     selector:'my-dashboard',
     moduleId:module.id,
